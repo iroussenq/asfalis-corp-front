@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #72858c;
+  height: 100%;
+  width: 100%;
+}
+h1 {
+  background-color: #5c696f;
+  border: 2px solid black;
+  margin-top: 0%;
+  margin-left: 0%;
+  margin-right: 1%;
+  text-align: center;
+  font-family: "Archivo", sans-serif;
+  color: rgb(2, 0, 0);
+}
+.texto {
+  background-color: #5c696f;
+  border: 2px solid black;
+  font-weight: bold;
+  margin: 5% 20%;
+  font-size: 25px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+.form-box {
+  background-color: #5c696f;
+  margin: 0 auto;
+  width: 370px;
+  padding: 15px 0;
+  border: solid 1px #ddd;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+  input {
+    width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 22px;
+    border-radius: 10px;
+    border: solid 1px rgb(199, 195, 195);
+    display: block;
+  }
+  button {
+    padding: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  .ng-touched.ng-invalid {
+    background-color: rgb(2, 0, 0);
+  }
+}

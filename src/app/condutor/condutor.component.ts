@@ -22,7 +22,7 @@ export class CondutorComponent implements OnInit {
     nome: new FormControl(null, [Validators.required, Validators.minLength(2)]),
     cpf: new FormControl(null, [Validators.required, Validators.minLength(11)]),
     statusCondutor: new FormControl(null, [Validators.required]),
-    niver: new FormControl(null, [Validators.required]),
+    dataDeNascimento: new FormControl(null, [Validators.required]),
   });
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}

@@ -1,6 +1,6 @@
 export interface CondutorModel {
   nome: string;
-  niver: string;
+  dataDeNascimento: string;
   cpf: string;
   statusCondutor: string;
 }

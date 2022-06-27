@@ -3,6 +3,6 @@ export interface Pessoa {
   nome: string;
   idade: number;
   dataDeNascimento: Date;
-  documento: string;
+  cpf: string;
   documentoValido: boolean;
 }

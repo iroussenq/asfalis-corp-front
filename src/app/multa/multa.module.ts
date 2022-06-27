@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MultaComponent } from './multa.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -8,8 +10,6 @@ import { MultaComponent } from './multa.component';
   declarations: [
     MultaComponent
   ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule],
 })
 export class MultaModule { }

@@ -1,1 +1,41 @@
-<p>rodovia works!</p>
+<div class="box">
+  <h1>AsfalisCorp</h1>
+  <p class="texto">Cadastro de Rodovia</p>
+  <form class="form-box" [formGroup]="formRodovia" (ngSubmit)="cadastrar()">
+    <input
+      formControlName="nome"
+      placeholder="Nome"
+      type="text"
+      maxlength="64"
+    />
+    <input formControlName="km" placeholder="KM" type="number" maxlength="4" />
+    <input formControlName="mortes" placeholder="Mortes" type="number" />
+    <button type="submit" [disabled]="!formRodovia.valid">Cadastrar</button>
+  </form>
+  <table class="tabela">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Km</th>
+      <th>Mortes</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let rodovia of list">
+      <td>{{ rodovia.id }}</td>
+      <td>{{ rodovia.nome }}</td>
+      <td>{{ rodovia.km }}</td>
+      <td>{{ rodovia.mortes }}</td>
+      <td>
+        <button (click)="editar(rodovia)">Editar</button>
+        <button (click)="excluir(rodovia)">Remover</button>
+      </td>
+    </tr>
+  </table>
+  <p class="texto">
+    {{
+      formRodovia.valid
+        ? "Informações enviaveis para central"
+        : "Informações não enviaveis para central"
+    }}
+  </p>
+</div>

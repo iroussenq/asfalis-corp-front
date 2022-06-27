@@ -1,0 +1,21 @@
+.box {
+  text-align: center;
+  h1 {
+    font-size: 76px;
+  }
+  p {
+    font-size: 26px;
+    font-weight: bold;
+  }
+  table,
+  th,
+  td {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+    padding: 4px 9px;
+    border-radius: 10px;
+    background-color: 5c696f;
+  }
+}

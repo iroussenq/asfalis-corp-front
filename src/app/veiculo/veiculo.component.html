@@ -8,7 +8,12 @@
       type="text"
       maxlength="64"
     />
-    <input formControlName="placa" placeholder="Placa" type="text" maxlength="8" />
+    <input
+      formControlName="placa"
+      placeholder="Placa"
+      type="text"
+      maxlength="8"
+    />
     <input
       formControlName="ano"
       placeholder="Ano do Veiculo"
@@ -23,12 +28,17 @@
       <th>Nome</th>
       <th>Placa</th>
       <th>Ano</th>
+      <th>Ações</th>
     </tr>
     <tr *ngFor="let veiculo of list">
       <td>{{ veiculo.id }}</td>
       <td>{{ veiculo.nome }}</td>
       <td>{{ veiculo.placa }}</td>
       <td>{{ veiculo.ano }}</td>
+      <td>
+        <button (click)="editar(veiculo)">Editar</button>
+        <button (click)="excluir(veiculo)">Remover</button>
+      </td>
     </tr>
   </table>
   <p class="texto">

@@ -39,6 +39,7 @@
       <th>CPF</th>
       <th>Patente do Policial</th>
       <th>Documento Valido</th>
+      <th>Ações</th>
     </tr>
     <tr *ngFor="let condutor of list">
       <td>{{ condutor.id }}</td>
@@ -48,11 +49,17 @@
       <td>{{ condutor.cpf }}</td>
       <td>{{ condutor.patente }}</td>
       <td>{{ condutor.documentoValido }}</td>
+      <td>
+        <button (click)="editar(condutor)">Editar</button>
+        <button (click)="excluir(condutor)">Remover</button>
+      </td>
     </tr>
   </table>
   <p class="texto">
     {{
-      formPolicial.valid ? "Cadastrado com sucesso" : "Informações não validas"
+      formPolicial.valid
+        ? "Informações enviaveis para a Central"
+        : "Informações não enviaveis para Central"
     }}
   </p>
 </div>

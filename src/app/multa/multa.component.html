@@ -8,7 +8,12 @@
       type="text"
       maxlength="64"
     />
-    <input formControlName="valorDaMulta" placeholder="Valor Da Multa" type="text" maxlength="14" />
+    <input
+      formControlName="valorDaMulta"
+      placeholder="Valor Da Multa"
+      type="text"
+      maxlength="14"
+    />
     <button type="submit" [disabled]="!formMulta.valid">Cadastrar</button>
   </form>
   <table>
@@ -16,16 +21,19 @@
       <th>ID</th>
       <th>Condicao Da Multa</th>
       <th>Valor Da Multa</th>
+      <th>Ações</th>
     </tr>
     <tr *ngFor="let multa of list">
       <td>{{ multa.id }}</td>
       <td>{{ multa.condicaoDaMulta }}</td>
       <td>{{ multa.valorDaMulta }}</td>
+      <td>
+        <button (click)="editar(multa)">Editar</button>
+        <button (click)="excluir(multa)">Remover</button>
+      </td>
     </tr>
   </table>
   <p class="texto">
-    {{
-      formMulta.valid ? "Cadastrado com sucesso" : "Informações não validas"
-    }}
+    {{ formMulta.valid ? "Cadastrado com sucesso" : "Informações não validas" }}
   </p>
 </div>

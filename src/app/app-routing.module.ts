@@ -10,7 +10,7 @@ import { SobreComponent } from './sobre/sobre.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'sobre', component: SobreComponent },
+  { path: 'informacoes-legais', component: SobreComponent },
   { path: 'condutor', component: CondutorComponent },
   { path: 'policial', component: PolicialComponent },
   { path: 'rodovia', component: RodoviaComponent },

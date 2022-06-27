@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    SobreModule,
     MenuModule,
     CondutorModule,
     PolicialModule,

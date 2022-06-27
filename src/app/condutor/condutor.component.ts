@@ -18,11 +18,11 @@ import { CondutorModel } from '../model/condutor-model';
 export class CondutorComponent implements OnInit {
   list: Condutor[] = [];
 
-  formCondutor: FormGroup = this.formBuilder.group({
-    nome: new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    cpf: new FormControl(null, [Validators.required, Validators.minLength(11)]),
-    statusCondutor: new FormControl(null, [Validators.required]),
-    dataDeNascimento: new FormControl(null, [Validators.required]),
+    formCondutor: FormGroup = this.formBuilder.group({
+      nome: new FormControl(null, [Validators.required, Validators.minLength(2)]),
+      cpf: new FormControl(null, [Validators.required, Validators.minLength(11)]),
+      statusCondutor: new FormControl(null, [Validators.required]),
+      dataDeNascimento: new FormControl(null, [Validators.required]),
   });
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}

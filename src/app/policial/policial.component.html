@@ -1,1 +1,50 @@
-<p>policial works!</p>
+<div class="box">
+  <h1>AsfalisCorp</h1>
+  <p class="texto">Cadastro de Policial</p>
+  <form class="form-box" [formGroup]="formPolicial" (ngSubmit)="cadastrar()">
+    <input
+      formControlName="nome"
+      placeholder="Nome"
+      type="text"
+      maxlength="64"
+    />
+    <input formControlName="cpf" placeholder="CPF" type="text" maxlength="14" />
+    <input
+      formControlName="patente"
+      placeholder="Patente do Policial"
+      type="text"
+      maxlength="64"
+    />
+    <input
+      formControlName="dataDeNascimento"
+      placeholder="Data de Nascimento"
+      type="date"
+    />
+    <button type="submit" [disabled]="!formPolicial.valid">Cadastrar</button>
+  </form>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Idade</th>
+      <th>Data de Nascimento</th>
+      <th>CPF</th>
+      <th>Patente do Policial</th>
+      <th>Documento Valido</th>
+    </tr>
+    <tr *ngFor="let condutor of list">
+      <td>{{ condutor.id }}</td>
+      <td>{{ condutor.nome }}</td>
+      <td>{{ condutor.idade }}</td>
+      <td>{{ condutor.dataDeNascimento }}</td>
+      <td>{{ condutor.cpf }}</td>
+      <td>{{ condutor.patente }}</td>
+      <td>{{ condutor.documentoValido }}</td>
+    </tr>
+  </table>
+  <p class="texto">
+    {{
+      formPolicial.valid ? "Cadastrado com sucesso" : "Informações não validas"
+    }}
+  </p>
+</div>

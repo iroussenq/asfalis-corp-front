@@ -9,12 +9,17 @@
       maxlength="64"
     />
     <input formControlName="cpf" placeholder="CPF" type="text" maxlength="14" />
-    <input
+    <select formControlName="statusCondutor" type="option">
+      <option value="EMBRIAGADO">Embriagado</option>
+      <option value="NAO_EMBRIAGADO">Não Embriagado</option>
+    </select>
+
+    <!-- <input
       formControlName="statusCondutor"
       placeholder="Status do Condutor"
       type="text"
       maxlength="64"
-    />
+    /> -->
     <input
       formControlName="dataDeNascimento"
       placeholder="Data de Nascimento"

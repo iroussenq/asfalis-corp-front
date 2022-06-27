@@ -49,4 +49,13 @@ h1 {
   .ng-touched.ng-invalid {
     background-color: rgba(2, 0, 0, 0.233);
   }
+  select{
+    width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 22px;
+    border-radius: 10px;
+    border: solid 1px rgb(199, 195, 195);
+    display: block;
+  }
 }

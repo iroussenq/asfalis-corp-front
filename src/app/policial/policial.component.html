@@ -9,12 +9,20 @@
       maxlength="64"
     />
     <input formControlName="cpf" placeholder="CPF" type="text" maxlength="14" />
-    <input
-      formControlName="patente"
-      placeholder="Patente do Policial"
-      type="text"
-      maxlength="64"
-    />
+    <select formControlName="patente" type="option">
+      <option value="Soldado">Soldado</option>
+      <option value="Cabo">Cabo</option>
+      <option value="Terceiro Sargendo">Terceiro Sargento</option>
+      <option value="Segundo Sargento">Segundo Sargento</option>
+      <option value="Primeiro Sargento">Primeiro Sargento</option>
+      <option value="Subtenente">Subtenente</option>
+      <option value="Segundo Tenente">Segundo Tenente</option>
+      <option value="Capitão">Capitão</option>
+      <option value="Major">Major</option>
+      <option value="Tenente Coronel">Tenente Coronel</option>
+      <option value="Coronel">Coronel</option>
+    </select>
+
     <input
       formControlName="dataDeNascimento"
       placeholder="Data de Nascimento"

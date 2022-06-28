@@ -1,23 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+.imgheader{
+  padding: 5px;
+  width: 150px;
+  height: 100px;
+}
+
+.center img{
+  width: 290px;
+  height: 200px;
+}
 
 body {
-  background-color: #72858c;
-  h1{
-  background-color: #e67124;
+  background-color: #4d4d4d;
+  header{
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  height: 100px;
+  background-color: #e67224;
   border: 2px solid black;
-  margin-top: 0%;
-  margin-left: 0%;
-  margin-right: 0%;
-  text-align: left;
+  font-size: 30px;
+  font-family: "Archivo", sans-serif;
   font-family: 'Cutive Mono', monospace;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   }
+}
+.formtabela{
+  overflow:hidden;
+  justify-content: space-around;
+  justify-items: auto;
+  display: flex;
 }
 .texto {
   background-color: #5c696f;
   border: 2px solid black;
   font-weight: bold;
-  margin: 5% 20%;
   font-size: 25px;
   text-align: center;
   font-family: 'Cutive Mono', monospace;
@@ -25,20 +49,19 @@ body {
 }
 .form-box {
   background-color: #5c696f;
-  margin: 0 auto;
   width: 370px;
   padding: 15px 0;
-  border: solid 1px #ddd;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgb(0, 0, 0);
+  outline: 2px solid;
+  outline-color: rgb(0, 0, 0);
   input {
     width: 300px;
     margin: 10px auto;
     padding: 10px;
     font-size: 22px;
-    border-radius: 10px;
     border: solid 1px rgb(199, 195, 195);
     display: block;
+    outline: 2px solid;
+    outline-color: rgb(0, 0, 0);
   }
   button {
     padding: 10px;
@@ -46,15 +69,18 @@ body {
     text-transform: uppercase;
   }
   .ng-touched.ng-invalid {
-    background-color: rgba(2, 0, 0, 0.233);
+    outline: 3px solid;
+    outline-color: red;
+
   }
   select {
     width: 300px;
     margin: 10px auto;
     padding: 10px;
     font-size: 22px;
-    border-radius: 10px;
     border: solid 1px rgb(199, 195, 195);
     display: block;
+    outline: 2px solid;
+    outline-color: rgb(0, 0, 0);
   }
 }

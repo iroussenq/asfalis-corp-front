@@ -1,6 +1,10 @@
 <div class="box">
+  <header>
+    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
   <h1>AsfalisCorp</h1>
+  </header>
   <p class="texto">Cadastro de Condutor</p>
+  <div class="formtabela">
   <form class="form-box" [formGroup]="formCondutor" (ngSubmit)="cadastrar()">
     <input
       formControlName="nome"
@@ -21,6 +25,7 @@
     />
     <button type="submit" [disabled]="!formCondutor.valid">Cadastrar</button>
   </form>
+
   <table class="tabelinha">
     <tr>
       <th>ID</th>
@@ -46,9 +51,10 @@
       </td>
     </tr>
   </table>
+</div>
   <p class="texto">
     {{
-      formCondutor.valid ? "Cadastrado com sucesso" : "Informações não validas"
+      formCondutor.valid ? "Informações enviaveis para Central " : "Informações não enviaveis para Central "
     }}
   </p>
 </div>

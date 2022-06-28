@@ -1,6 +1,10 @@
 <div class="box">
+  <header>
+    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
   <h1>AsfalisCorp</h1>
+  </header>
   <p class="texto">Cadastro de Veiculo</p>
+  <div class="formtabela">
   <form class="form-box" [formGroup]="formVeiculo" (ngSubmit)="cadastrar()">
     <input
       formControlName="nome"
@@ -41,9 +45,10 @@
       </td>
     </tr>
   </table>
+</div>
   <p class="texto">
     {{
-      formVeiculo.valid ? "Cadastrado com sucesso" : "Informações não validas"
+      formVeiculo.valid ? "Informações enviaveis para Central " : "Informações não enviaveis para Central "
     }}
   </p>
 </div>

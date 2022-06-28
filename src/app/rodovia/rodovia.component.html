@@ -1,6 +1,10 @@
 <div class="box">
+  <header>
+    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
   <h1>AsfalisCorp</h1>
+  </header>
   <p class="texto">Cadastro de Rodovia</p>
+  <div class="formtabela">
   <form class="form-box" [formGroup]="formRodovia" (ngSubmit)="cadastrar()">
     <input
       formControlName="nome"
@@ -31,6 +35,7 @@
       </td>
     </tr>
   </table>
+</div>
   <p class="texto">
     {{
       formRodovia.valid

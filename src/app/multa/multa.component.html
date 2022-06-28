@@ -1,6 +1,10 @@
 <div class="box">
+  <header>
+    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
   <h1>AsfalisCorp</h1>
+  </header>
   <p class="texto">Cadastro de Multas</p>
+  <div class="formtabela">
   <form class="form-box" [formGroup]="formMulta" (ngSubmit)="cadastrar()">
     <input
       formControlName="condicaoDaMulta"
@@ -33,6 +37,7 @@
       </td>
     </tr>
   </table>
+</div>
   <p class="texto">
     {{ formMulta.valid ? "Cadastrado com sucesso" : "Informações não validas" }}
   </p>

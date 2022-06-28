@@ -1,4 +1,4 @@
-import { Acidente } from './../domain/pedido';
+import { Acidente } from './../domain/acidente';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -7,30 +7,31 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PedidoService {
-  url = 'http://localhost:8080/pedido/';
+  url = 'http://localhost:8080/acidente/';
 
   constructor(private http: HttpClient) {}
 
-  consultar(): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(this.url + 'consultar');
+  consultar(): Observable<Acidente[]> {
+    return this.http.get<Acidente[]>(this.url + 'consultar');
   }
 
-  cadastrar(idCliente: string, idFarmaceutico: string): Observable<Pedido> {
-    return this.http.post<Pedido>(this.url + 'cadastrar', {
-      idCliente,
-      idFarmaceutico,
+  cadastrar(
+    idCondutor: string,
+    idPolicial: string,
+    idRodovia: string,
+    idVeiculo: string
+  ): Observable<Acidente> {
+    return this.http.post<Acidente>(this.url + 'cadastrar', {
+      idCondutor,
+      idPolicial,
+      idRodovia,
+      idVeiculo,
     });
   }
 
-  adicionarProduto(id: string, idProduto: string): Observable<Pedido> {
-    return this.http.put<Pedido>(this.url + 'adicionar-produto/' + id, {
-      idsProdutos: [idProduto],
-    });
-  }
-
-  pagar(id: string, valor: number): Observable<Pedido> {
-    return this.http.put<Pedido>(this.url + 'pagar/' + id, {
-      valor,
+  adicionarMulta(id: string, idMulta: string): Observable<Acidente> {
+    return this.http.put<Acidente>(this.url + 'adicionar-multa/' + id, {
+      idsMultas: [idMulta],
     });
   }
 }

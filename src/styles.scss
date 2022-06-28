@@ -1,39 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
-.imgheader{
+.imgheader {
   padding: 5px;
   width: 150px;
   height: 100px;
 }
 
-.center img{
+.center img {
   width: 290px;
   height: 200px;
 }
 
 body {
   background-color: #4d4d4d;
-  header{
-  align-items: center;
-  display: flex;
-  gap: 20px;
-  height: 100px;
-  background-color: #e67224;
-  border: 2px solid black;
-  font-size: 30px;
-  font-family: "Archivo", sans-serif;
-  font-family: 'Cutive Mono', monospace;
-  color: rgb(0, 0, 0);
+  header {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    height: 100px;
+    background-color: #e67224;
+    border: 2px solid black;
+    font-size: 30px;
+    font-family: "Archivo", sans-serif;
+    font-family: "Cutive Mono", monospace;
+    color: rgba(66, 66, 66, 255);
   }
 }
-.formtabela{
-  overflow:hidden;
+.formtabela {
+  overflow: hidden;
   justify-content: space-around;
   justify-items: auto;
   display: flex;
@@ -44,7 +43,7 @@ body {
   font-weight: bold;
   font-size: 25px;
   text-align: center;
-  font-family: 'Cutive Mono', monospace;
+  font-family: "Cutive Mono", monospace;
   color: rgb(0, 0, 0);
 }
 .form-box {
@@ -71,7 +70,6 @@ body {
   .ng-touched.ng-invalid {
     outline: 3px solid;
     outline-color: red;
-
   }
   select {
     width: 300px;

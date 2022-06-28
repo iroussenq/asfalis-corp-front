@@ -1,3 +1,4 @@
+import { CondutorService } from './../service/condutor.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -26,14 +27,17 @@ export class CondutorComponent implements OnInit {
     dataDeNascimento: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private condutorService: CondutorService
+  ) {}
 
   ngOnInit(): void {
     this.carregaTabela();
   }
 
   private carregaTabela(): void {
-    this.get().subscribe((domains: Condutor[]) => {
+    this.condutorService.consultar().subscribe((domains: Condutor[]) => {
       this.list = domains;
     });
   }
@@ -42,23 +46,27 @@ export class CondutorComponent implements OnInit {
     const id = this.formCondutor.controls['id'].value;
     const condutorModel: CondutorModel = this.formCondutor.getRawValue();
     if (id) {
-      this.put(id, condutorModel).subscribe((domain: Condutor) => {
-        if (domain.id) {
-          this.carregaTabela();
-          this.formCondutor.reset();
-        }
-      });
+      this.condutorService
+        .alterar(id, condutorModel)
+        .subscribe((domain: Condutor) => {
+          if (domain.id) {
+            this.carregaTabela();
+            this.formCondutor.reset();
+          }
+        });
     } else {
-      this.post(condutorModel).subscribe((domain: Condutor) => {
-        if (domain.id) {
-          this.list.push(domain);
-          this.formCondutor.reset();
-        }
-      });
+      this.condutorService
+        .cadastrar(condutorModel)
+        .subscribe((domain: Condutor) => {
+          if (domain.id) {
+            this.list.push(domain);
+            this.formCondutor.reset();
+          }
+        });
     }
   }
 
-  editar(condutor: Condutor) {
+  editar(condutor: Condutor): void {
     this.formCondutor.controls['id'].setValue(condutor.id);
     this.formCondutor.controls['nome'].setValue(condutor.nome);
     this.formCondutor.controls['cpf'].setValue(condutor.cpf);
@@ -68,36 +76,15 @@ export class CondutorComponent implements OnInit {
     this.formCondutor.controls['dataDeNascimento'].setValue(
       condutor.dataDeNascimento
     );
-    this.formCondutor.controls['idade'].setValue(condutor.idade);
   }
 
-  excluir(condutor: Condutor) {
-    const id = this.formCondutor.controls['id'].value;
-    this.delete(condutor.id).subscribe((domain: Condutor) => {
-      if (domain.id) {
-        this.carregaTabela();
-        this.formCondutor.reset();
-      }
-    });
-  }
-
-  private post(model: CondutorModel): Observable<Condutor> {
-    const url = 'http://localhost:8080/condutor/cadastrar';
-    return this.http.post<Condutor>(url, model);
-  }
-
-  private get(): Observable<Condutor[]> {
-    const url = 'http://localhost:8080/condutor/consultar';
-    return this.http.get<Condutor[]>(url);
-  }
-
-  private put(id: string, model: CondutorModel): Observable<Condutor> {
-    const url = 'http://localhost:8080/condutor/alterar/' + id;
-    return this.http.put<Condutor>(url, model);
-  }
-
-  private delete(id: string): Observable<Condutor> {
-    const url = 'http://localhost:8080/condutor/remover/' + id;
-    return this.http.delete<Condutor>(url);
+  remover(condutor: Condutor): void {
+    this.condutorService
+      .remover(condutor.id)
+      .subscribe((condutor: Condutor) => {
+        if (condutor.id) {
+          this.carregaTabela();
+        }
+      });
   }
 }

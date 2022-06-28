@@ -1,3 +1,4 @@
+import { AcidenteModule } from './acidente/acidente.module';
 import { VeiculoModule } from './veiculo/veiculo.module';
 import { RodoviaModule } from './rodovia/rodovia.module';
 import { MultaModule } from './multa/multa.module';
@@ -25,6 +26,7 @@ import { AppComponent } from './app.component';
     MultaModule,
     RodoviaModule,
     VeiculoModule
+    AcidenteModule
   ],
   providers: [],
   bootstrap: [AppComponent],

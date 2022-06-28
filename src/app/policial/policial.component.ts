@@ -1,6 +1,6 @@
+import { PolicialService } from './../service/policial.service';
 import { PolicialModel } from './../model/policial-model';
 import { Policial } from './../domain/policial';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -8,7 +8,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-policial',
   templateUrl: './policial.component.html',
@@ -25,14 +24,17 @@ export class PolicialComponent implements OnInit {
     dataDeNascimento: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private policialService: PolicialService
+  ) {}
 
   ngOnInit(): void {
     this.carregaTabela();
   }
 
   private carregaTabela(): void {
-    this.get().subscribe((domains: Policial[]) => {
+    this.policialService.consultar().subscribe((domains: Policial[]) => {
       this.list = domains;
     });
   }
@@ -41,23 +43,27 @@ export class PolicialComponent implements OnInit {
     const id = this.formPolicial.controls['id'].value;
     const policialModel: PolicialModel = this.formPolicial.getRawValue();
     if (id) {
-      this.put(id, policialModel).subscribe((domain: Policial) => {
-        if (domain.id) {
-          this.carregaTabela();
-          this.formPolicial.reset();
-        }
-      });
+      this.policialService
+        .alterar(id, policialModel)
+        .subscribe((domain: Policial) => {
+          if (domain.id) {
+            this.carregaTabela();
+            this.formPolicial.reset();
+          }
+        });
     } else {
-      this.post(policialModel).subscribe((domain: Policial) => {
-        if (domain.id) {
-          this.list.push(domain);
-          this.formPolicial.reset();
-        }
-      });
+      this.policialService
+        .cadastrar(policialModel)
+        .subscribe((domain: Policial) => {
+          if (domain.id) {
+            this.list.push(domain);
+            this.formPolicial.reset();
+          }
+        });
     }
   }
 
-  editar(policial: Policial) {
+  editar(policial: Policial): void {
     this.formPolicial.controls['id'].setValue(policial.id);
     this.formPolicial.controls['nome'].setValue(policial.nome);
     this.formPolicial.controls['cpf'].setValue(policial.cpf);
@@ -65,36 +71,15 @@ export class PolicialComponent implements OnInit {
     this.formPolicial.controls['dataDeNascimento'].setValue(
       policial.dataDeNascimento
     );
-    this.formPolicial.controls['idade'].setValue(policial.idade);
   }
 
-  excluir(policial: Policial) {
-    const id = this.formPolicial.controls['id'].value;
-    this.delete(policial.id).subscribe((domain: Policial) => {
-      if (domain.id) {
-        this.carregaTabela();
-        this.formPolicial.reset();
-      }
-    });
-  }
-
-  private post(model: PolicialModel): Observable<Policial> {
-    const url = 'http://localhost:8080/policial/cadastrar';
-    return this.http.post<Policial>(url, model);
-  }
-
-  private get(): Observable<Policial[]> {
-    const url = 'http://localhost:8080/policial/consultar';
-    return this.http.get<Policial[]>(url);
-  }
-
-  private put(id: string, model: PolicialModel): Observable<Policial> {
-    const url = 'http://localhost:8080/policial/alterar/' + id;
-    return this.http.put<Policial>(url, model);
-  }
-
-  private delete(id: string): Observable<Policial> {
-    const url = 'http://localhost:8080/policial/remover/' + id;
-    return this.http.delete<Policial>(url);
+  remover(policial: Policial): void {
+    this.policialService
+      .remover(policial.id)
+      .subscribe((policial: Policial) => {
+        if (policial.id) {
+          this.carregaTabela();
+        }
+      });
   }
 }

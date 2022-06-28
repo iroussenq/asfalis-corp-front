@@ -1,60 +1,67 @@
 <div class="box">
   <header>
-    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
-  <h1>AsfalisCorp</h1>
+    <img class="imgheader" src="assets/logo.jpeg" alt="logo" />
+    <h1>AsfalisCorp</h1>
   </header>
   <p class="texto">Cadastro de Condutor</p>
   <div class="formtabela">
-  <form class="form-box" [formGroup]="formCondutor" (ngSubmit)="cadastrar()">
-    <input
-      formControlName="nome"
-      placeholder="Nome"
-      type="text"
-      maxlength="64"
-    />
-    <input formControlName="cpf" placeholder="CPF" type="text" maxlength="14" />
-    <select formControlName="statusCondutor" type="option">
-      <option value="EMBRIAGADO">Embriagado</option>
-      <option value="NAO_EMBRIAGADO">Não Embriagado</option>
-    </select>
+    <form class="form-box" [formGroup]="formCondutor" (ngSubmit)="cadastrar()">
+      <input
+        formControlName="nome"
+        placeholder="Nome"
+        type="text"
+        maxlength="64"
+      />
+      <input
+        formControlName="cpf"
+        placeholder="CPF"
+        type="text"
+        maxlength="14"
+      />
+      <select formControlName="statusCondutor" type="option">
+        <option value="EMBRIAGADO">Embriagado</option>
+        <option value="NAO_EMBRIAGADO">Não Embriagado</option>
+      </select>
 
-    <input
-      formControlName="dataDeNascimento"
-      placeholder="Data de Nascimento"
-      type="date"
-    />
-    <button type="submit" [disabled]="!formCondutor.valid">Cadastrar</button>
-  </form>
+      <input
+        formControlName="dataDeNascimento"
+        placeholder="Data de Nascimento"
+        type="date"
+      />
+      <button type="submit" [disabled]="!formCondutor.valid">Cadastrar</button>
+    </form>
 
-  <table class="tabelinha">
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Idade</th>
-      <th>Data de Nascimento</th>
-      <th>CPF</th>
-      <th>Status do Condutor</th>
-      <th>Documento Valido</th>
-      <th>Ações</th>
-    </tr>
-    <tr *ngFor="let condutor of list">
-      <td>{{ condutor.id }}</td>
-      <td>{{ condutor.nome }}</td>
-      <td>{{ condutor.idade }}</td>
-      <td>{{ condutor.dataDeNascimento | date: "dd/MM/yyyy" }}</td>
-      <td>{{ condutor.cpf }}</td>
-      <td>{{ condutor.statusCondutor }}</td>
-      <td>{{ condutor.documentoValido }}</td>
-      <td>
-        <button (click)="editar(condutor)">Editar</button>
-        <button (click)="excluir(condutor)">Remover</button>
-      </td>
-    </tr>
-  </table>
-</div>
+    <table class="tabelinha">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Data de Nascimento</th>
+        <th>CPF</th>
+        <th>Status do Condutor</th>
+        <th>Documento Valido</th>
+        <th>Ações</th>
+      </tr>
+      <tr *ngFor="let condutor of list">
+        <td>{{ condutor.id }}</td>
+        <td>{{ condutor.nome }}</td>
+        <td>{{ condutor.idade }}</td>
+        <td>{{ condutor.dataDeNascimento | date: "dd/MM/yyyy" }}</td>
+        <td>{{ condutor.cpf }}</td>
+        <td>{{ condutor.statusCondutor }}</td>
+        <td>{{ condutor.documentoValido }}</td>
+        <td>
+          <button (click)="editar(condutor)">Editar</button>
+          <button (click)="remover(condutor)">Remover</button>
+        </td>
+      </tr>
+    </table>
+  </div>
   <p class="texto">
     {{
-      formCondutor.valid ? "Informações enviaveis para Central " : "Informações não enviaveis para Central "
+      formCondutor.valid
+        ? "Informações enviaveis para Central "
+        : "Informações não enviaveis para Central "
     }}
   </p>
 </div>

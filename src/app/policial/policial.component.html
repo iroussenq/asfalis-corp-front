@@ -1,65 +1,70 @@
 <div class="box">
   <header>
-    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
-  <h1>AsfalisCorp</h1>
+    <img class="imgheader" src="assets/logo.jpeg" alt="logo" />
+    <h1>AsfalisCorp</h1>
   </header>
   <p class="texto">Cadastro de Policial</p>
   <div class="formtabela">
-  <form class="form-box" [formGroup]="formPolicial" (ngSubmit)="cadastrar()">
-    <input
-      formControlName="nome"
-      placeholder="Nome"
-      type="text"
-      maxlength="64"
-    />
-    <input formControlName="cpf" placeholder="CPF" type="text" maxlength="14" />
-    <select formControlName="patente" type="option">
-      <option value="Soldado">Soldado</option>
-      <option value="Cabo">Cabo</option>
-      <option value="Terceiro Sargendo">Terceiro Sargento</option>
-      <option value="Segundo Sargento">Segundo Sargento</option>
-      <option value="Primeiro Sargento">Primeiro Sargento</option>
-      <option value="Subtenente">Subtenente</option>
-      <option value="Segundo Tenente">Segundo Tenente</option>
-      <option value="Capitão">Capitão</option>
-      <option value="Major">Major</option>
-      <option value="Tenente Coronel">Tenente Coronel</option>
-      <option value="Coronel">Coronel</option>
-    </select>
+    <form class="form-box" [formGroup]="formPolicial" (ngSubmit)="cadastrar()">
+      <input
+        formControlName="nome"
+        placeholder="Nome"
+        type="text"
+        maxlength="64"
+      />
+      <input
+        formControlName="cpf"
+        placeholder="CPF"
+        type="text"
+        maxlength="14"
+      />
+      <select formControlName="patente" type="option">
+        <option value="Soldado">Soldado</option>
+        <option value="Cabo">Cabo</option>
+        <option value="Terceiro Sargendo">Terceiro Sargento</option>
+        <option value="Segundo Sargento">Segundo Sargento</option>
+        <option value="Primeiro Sargento">Primeiro Sargento</option>
+        <option value="Subtenente">Subtenente</option>
+        <option value="Segundo Tenente">Segundo Tenente</option>
+        <option value="Capitão">Capitão</option>
+        <option value="Major">Major</option>
+        <option value="Tenente Coronel">Tenente Coronel</option>
+        <option value="Coronel">Coronel</option>
+      </select>
 
-    <input
-      formControlName="dataDeNascimento"
-      placeholder="Data de Nascimento"
-      type="date"
-    />
-    <button type="submit" [disabled]="!formPolicial.valid">Cadastrar</button>
-  </form>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Idade</th>
-      <th>Data de Nascimento</th>
-      <th>CPF</th>
-      <th>Patente do Policial</th>
-      <th>Documento Valido</th>
-      <th>Ações</th>
-    </tr>
-    <tr *ngFor="let condutor of list">
-      <td>{{ condutor.id }}</td>
-      <td>{{ condutor.nome }}</td>
-      <td>{{ condutor.idade }}</td>
-      <td>{{ condutor.dataDeNascimento }}</td>
-      <td>{{ condutor.cpf }}</td>
-      <td>{{ condutor.patente }}</td>
-      <td>{{ condutor.documentoValido }}</td>
-      <td>
-        <button (click)="editar(condutor)">Editar</button>
-        <button (click)="excluir(condutor)">Remover</button>
-      </td>
-    </tr>
-  </table>
-</div>
+      <input
+        formControlName="dataDeNascimento"
+        placeholder="Data de Nascimento"
+        type="date"
+      />
+      <button type="submit" [disabled]="!formPolicial.valid">Cadastrar</button>
+    </form>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Data de Nascimento</th>
+        <th>CPF</th>
+        <th>Patente do Policial</th>
+        <th>Documento Valido</th>
+        <th>Ações</th>
+      </tr>
+      <tr *ngFor="let policial of list">
+        <td>{{ policial.id }}</td>
+        <td>{{ policial.nome }}</td>
+        <td>{{ policial.idade }}</td>
+        <td>{{ policial.dataDeNascimento }}</td>
+        <td>{{ policial.cpf }}</td>
+        <td>{{ policial.patente }}</td>
+        <td>{{ policial.documentoValido }}</td>
+        <td>
+          <button (click)="editar(policial)">Editar</button>
+          <button (click)="remover(policial)">Remover</button>
+        </td>
+      </tr>
+    </table>
+  </div>
   <p class="texto">
     {{
       formPolicial.valid

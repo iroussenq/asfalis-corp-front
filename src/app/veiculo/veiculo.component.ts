@@ -1,6 +1,6 @@
+import { VeiculoService } from './../service/veiculo.service';
 import { VeiculoModel } from './../model/veiculo-model';
 import { Veiculo } from './../domain/veiculo';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -8,7 +8,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-veiculo',
   templateUrl: './veiculo.component.html',
@@ -27,14 +26,17 @@ export class VeiculoComponent implements OnInit {
     ano: new FormControl(null, [Validators.required, Validators.minLength(4)]),
   });
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private veiculoService: VeiculoService
+  ) {}
 
   ngOnInit(): void {
     this.carregaTabela();
   }
 
   private carregaTabela(): void {
-    this.get().subscribe((domains: Veiculo[]) => {
+    this.veiculoService.consultar().subscribe((domains: Veiculo[]) => {
       this.list = domains;
     });
   }
@@ -43,19 +45,23 @@ export class VeiculoComponent implements OnInit {
     const id = this.formVeiculo.controls['id'].value;
     const veiculoModel: VeiculoModel = this.formVeiculo.getRawValue();
     if (id) {
-      this.put(id, veiculoModel).subscribe((domain: Veiculo) => {
-        if (domain.id) {
-          this.carregaTabela();
-          this.formVeiculo.reset();
-        }
-      });
+      this.veiculoService
+        .alterar(id, veiculoModel)
+        .subscribe((domain: Veiculo) => {
+          if (domain.id) {
+            this.carregaTabela();
+            this.formVeiculo.reset();
+          }
+        });
     } else {
-      this.post(veiculoModel).subscribe((domain: Veiculo) => {
-        if (domain.id) {
-          this.list.push(domain);
-          this.formVeiculo.reset();
-        }
-      });
+      this.veiculoService
+        .cadastrar(veiculoModel)
+        .subscribe((domain: Veiculo) => {
+          if (domain.id) {
+            this.list.push(domain);
+            this.formVeiculo.reset();
+          }
+        });
     }
   }
 
@@ -66,33 +72,12 @@ export class VeiculoComponent implements OnInit {
     this.formVeiculo.controls['ano'].setValue(veiculo.ano);
   }
 
-  excluir(veiculo: Veiculo) {
+  remover(veiculo: Veiculo) {
     const id = this.formVeiculo.controls['id'].value;
-    this.delete(veiculo.id).subscribe((domain: Veiculo) => {
+    this.veiculoService.remover(veiculo.id).subscribe((domain: Veiculo) => {
       if (domain.id) {
         this.carregaTabela();
-        this.formVeiculo.reset();
       }
     });
-  }
-
-  private post(model: VeiculoModel): Observable<Veiculo> {
-    const url = 'http://localhost:8080/veiculo/cadastrar';
-    return this.http.post<Veiculo>(url, model);
-  }
-
-  private get(): Observable<Veiculo[]> {
-    const url = 'http://localhost:8080/veiculo/consultar';
-    return this.http.get<Veiculo[]>(url);
-  }
-
-  private put(id: string, model: VeiculoModel): Observable<Veiculo> {
-    const url = 'http://localhost:8080/veiculo/alterar/' + id;
-    return this.http.put<Veiculo>(url, model);
-  }
-
-  private delete(id: string): Observable<Veiculo> {
-    const url = 'http://localhost:8080/veiculo/remover/' + id;
-    return this.http.delete<Veiculo>(url);
   }
 }

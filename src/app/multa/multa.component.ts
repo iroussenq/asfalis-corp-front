@@ -1,6 +1,6 @@
 import { MultaModel } from './../model/multa-model';
+import { MultaService } from './../service/multa.service';
 import { Multa } from './../domain/multa';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -8,7 +8,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-multa',
@@ -27,30 +26,33 @@ export class MultaComponent implements OnInit {
     valorDaMulta: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private multaService: MultaService
+  ) {}
 
   ngOnInit(): void {
-    this.carregaTabela;
+    this.carregaTabela();
   }
 
   private carregaTabela(): void {
-    this.get().subscribe((domains: Multa[]) => {
+    this.multaService.consultar().subscribe((domains: Multa[]) => {
       this.list = domains;
     });
   }
 
   cadastrar(): void {
     const id = this.formMulta.controls['id'].value;
-    const multaModel: MultaModel = this.formMulta.getRawValue();
+    const model: MultaModel = this.formMulta.getRawValue();
     if (id) {
-      this.put(id, multaModel).subscribe((domain: Multa) => {
+      this.multaService.alterar(id, model).subscribe((domain: Multa) => {
         if (domain.id) {
           this.carregaTabela();
           this.formMulta.reset();
         }
       });
     } else {
-      this.post(multaModel).subscribe((domain: Multa) => {
+      this.multaService.cadastrar(model).subscribe((domain: Multa) => {
         if (domain.id) {
           this.list.push(domain);
           this.formMulta.reset();
@@ -59,38 +61,17 @@ export class MultaComponent implements OnInit {
     }
   }
 
-  editar(multa: Multa) {
+  editar(multa: Multa): void {
     this.formMulta.controls['id'].setValue(multa.id);
     this.formMulta.controls['condicaoDaMulta'].setValue(multa.condicaoDaMulta);
     this.formMulta.controls['valorDaMulta'].setValue(multa.valorDaMulta);
   }
 
-  excluir(multa: Multa) {
-    const id = this.formMulta.controls['id'].value;
-    this.delete(multa.id).subscribe((domain: Multa) => {
-      if (domain.id) {
+  remover(multa: Multa): void {
+    this.multaService.remover(multa.id).subscribe((m: Multa) => {
+      if (m.id) {
         this.carregaTabela();
-        this.formMulta.reset();
       }
     });
-  }
-
-  private post(model: MultaModel): Observable<Multa> {
-    const url = 'http://localhost:8080/multa/cadastrar';
-    return this.http.post<Multa>(url, model);
-  }
-
-  private get(): Observable<Multa[]> {
-    const url = 'http://localhost:8080/multa/consultar';
-    return this.http.get<Multa[]>(url);
-  }
-  private put(id: string, model: MultaModel): Observable<Multa> {
-    const url = 'http://localhost:8080/multa/alterar/' + id;
-    return this.http.put<Multa>(url, model);
-  }
-
-  private delete(id: string): Observable<Multa> {
-    const url = 'http://localhost:8080/multa/remover/' + id;
-    return this.http.delete<Multa>(url);
   }
 }

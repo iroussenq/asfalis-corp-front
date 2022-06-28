@@ -1,54 +1,56 @@
 <div class="box">
   <header>
-    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
-  <h1>AsfalisCorp</h1>
+    <img class="imgheader" src="assets/logo.jpeg" alt="logo" />
+    <h1>AsfalisCorp</h1>
   </header>
   <p class="texto">Cadastro de Veiculo</p>
   <div class="formtabela">
-  <form class="form-box" [formGroup]="formVeiculo" (ngSubmit)="cadastrar()">
-    <input
-      formControlName="nome"
-      placeholder="Nome"
-      type="text"
-      maxlength="64"
-    />
-    <input
-      formControlName="placa"
-      placeholder="Placa"
-      type="text"
-      maxlength="8"
-    />
-    <input
-      formControlName="ano"
-      placeholder="Ano do Veiculo"
-      type="text"
-      maxlength="4"
-    />
-    <button type="submit" [disabled]="!formVeiculo.valid">Cadastrar</button>
-  </form>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Placa</th>
-      <th>Ano</th>
-      <th>Ações</th>
-    </tr>
-    <tr *ngFor="let veiculo of list">
-      <td>{{ veiculo.id }}</td>
-      <td>{{ veiculo.nome }}</td>
-      <td>{{ veiculo.placa }}</td>
-      <td>{{ veiculo.ano }}</td>
-      <td>
-        <button (click)="editar(veiculo)">Editar</button>
-        <button (click)="excluir(veiculo)">Remover</button>
-      </td>
-    </tr>
-  </table>
-</div>
+    <form class="form-box" [formGroup]="formVeiculo" (ngSubmit)="cadastrar()">
+      <input
+        formControlName="nome"
+        placeholder="Nome"
+        type="text"
+        maxlength="64"
+      />
+      <input
+        formControlName="placa"
+        placeholder="Placa"
+        type="text"
+        maxlength="8"
+      />
+      <input
+        formControlName="ano"
+        placeholder="Ano do Veiculo"
+        type="text"
+        maxlength="4"
+      />
+      <button type="submit" [disabled]="!formVeiculo.valid">Cadastrar</button>
+    </form>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Placa</th>
+        <th>Ano</th>
+        <th>Ações</th>
+      </tr>
+      <tr *ngFor="let veiculo of list">
+        <td>{{ veiculo.id }}</td>
+        <td>{{ veiculo.nome }}</td>
+        <td>{{ veiculo.placa }}</td>
+        <td>{{ veiculo.ano }}</td>
+        <td>
+          <button (click)="editar(veiculo)">Editar</button>
+          <button (click)="remover(veiculo)">Remover</button>
+        </td>
+      </tr>
+    </table>
+  </div>
   <p class="texto">
     {{
-      formVeiculo.valid ? "Informações enviaveis para Central " : "Informações não enviaveis para Central "
+      formVeiculo.valid
+        ? "Informações enviaveis para Central "
+        : "Informações não enviaveis para Central "
     }}
   </p>
 </div>

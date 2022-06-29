@@ -11,13 +11,13 @@ import { SobreComponent } from './sobre/sobre.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'informacoes-legais', component: SobreComponent },
-   {path: 'acidente',component: AcidenteComponent},
+  { path: 'acidente', component: AcidenteComponent },
   { path: 'condutor', component: CondutorComponent },
   { path: 'policial', component: PolicialComponent },
-  { path: 'rodovia', component: RodoviaComponent },
-  { path: 'multa', component: MultaComponent },
   { path: 'veiculo', component: VeiculoComponent },
+  { path: 'multa', component: MultaComponent },
+  { path: 'rodovia', component: RodoviaComponent },
+  { path: 'informacoes-legais', component: SobreComponent },
 ];
 
 @NgModule({

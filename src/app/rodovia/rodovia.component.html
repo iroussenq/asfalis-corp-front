@@ -1,41 +1,44 @@
 <div class="box">
   <header>
-    <img class ="imgheader" src="assets/logo.jpeg" alt="logo">
-  <h1>AsfalisCorp</h1>
+    <img class="imgheader" src="assets/logo.jpeg" alt="logo" />
+    <h1>AsfalisCorp</h1>
   </header>
   <p class="texto">Cadastro de Rodovia</p>
   <div class="formtabela">
-  <form class="form-box" [formGroup]="formRodovia" (ngSubmit)="cadastrar()">
-    <input
-      formControlName="nome"
-      placeholder="Nome"
-      type="text"
-      maxlength="64"
-    />
-    <input formControlName="km" placeholder="KM" type="number" maxlength="4" />
-    <input formControlName="mortes" placeholder="Mortes" type="number" />
-    <button type="submit" [disabled]="!formRodovia.valid">Cadastrar</button>
-  </form>
-  <table class="tabela">
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Km</th>
-      <th>Mortes</th>
-      <th>Ações</th>
-    </tr>
-    <tr *ngFor="let rodovia of list">
-      <td>{{ rodovia.id }}</td>
-      <td>{{ rodovia.nome }}</td>
-      <td>{{ rodovia.km }}</td>
-      <td>{{ rodovia.mortes }}</td>
-      <td>
-        <button (click)="editar(rodovia)">Editar</button>
-        <button (click)="excluir(rodovia)">Remover</button>
-      </td>
-    </tr>
-  </table>
-</div>
+    <form class="form-box" [formGroup]="formRodovia" (ngSubmit)="cadastrar()">
+      <input
+        formControlName="nome"
+        placeholder="Nome"
+        type="text"
+        maxlength="64"
+      />
+      <input
+        formControlName="km"
+        placeholder="KM"
+        type="number"
+        maxlength="4"
+      />
+      <input formControlName="mortes" placeholder="Mortes" type="number" />
+      <button type="submit" [disabled]="!formRodovia.valid">Cadastrar</button>
+    </form>
+    <table class="tabela">
+      <tr>
+        <th>Nome</th>
+        <th>Km</th>
+        <th>Mortes</th>
+        <th>Ações</th>
+      </tr>
+      <tr *ngFor="let rodovia of list">
+        <td>{{ rodovia.nome }}</td>
+        <td>{{ rodovia.km }}</td>
+        <td>{{ rodovia.mortes }}</td>
+        <td>
+          <button (click)="editar(rodovia)">Editar</button>
+          <button (click)="excluir(rodovia)">Remover</button>
+        </td>
+      </tr>
+    </table>
+  </div>
   <p class="texto">
     {{
       formRodovia.valid

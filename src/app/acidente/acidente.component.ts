@@ -32,10 +32,12 @@ export class AcidenteComponent implements OnInit {
   multas: Multa[] = [];
 
   formAcidente: FormGroup = this.formBuilder.group({
+    id: new FormControl(null),
     idCondutor: new FormControl('', [Validators.required]),
     idPolicial: new FormControl('', [Validators.required]),
     idRodovia: new FormControl('', [Validators.required]),
     idVeiculo: new FormControl('', [Validators.required]),
+    dataDoAcidente: new FormControl(null, [Validators.required]),
   });
 
   formAddMulta: FormGroup = this.formBuilder.group({
@@ -100,17 +102,28 @@ export class AcidenteComponent implements OnInit {
 
   cadastrar(): void {
     if (this.formAcidente.valid) {
-      const idCondutor = this.formAcidente.controls['idCliente'].value;
+      const idCondutor = this.formAcidente.controls['idCondutor'].value;
       const idPolicial = this.formAcidente.controls['idPolicial'].value;
       const idRodovia = this.formAcidente.controls['idRodovia'].value;
       const idVeiculo = this.formAcidente.controls['idVeiculo'].value;
+      const dataDoAcidente = this.formAcidente.controls['dataDoAcidente'].value;
       this.acidenteService
-        .cadastrar(idCondutor, idPolicial,idRodovia,idVeiculo)
+        .cadastrar(idCondutor, idPolicial, idRodovia, idVeiculo, dataDoAcidente)
         .subscribe((acidente: Acidente) => {
           this.acidentes.push(acidente);
           this.resetForm();
         });
     }
+  }
+
+  remover(acidente: Acidente): void {
+    this.acidenteService
+      .remover(acidente.id)
+      .subscribe((acidente: Acidente) => {
+        if (acidente.id) {
+          this.ngOnInit();
+        }
+      });
   }
 
   clickAddMulta(acidente: Acidente) {
@@ -134,7 +147,6 @@ export class AcidenteComponent implements OnInit {
     this.formAcidente.controls['idPolicial'].setValue('');
     this.formAcidente.controls['idRodovia'].setValue('');
     this.formAcidente.controls['idVeiculo'].setValue('');
-
     this.formAddMulta.reset();
     this.formAddMulta.controls['idMulta'].setValue('');
   }

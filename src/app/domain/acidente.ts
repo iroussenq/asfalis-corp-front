@@ -4,7 +4,7 @@ import { Policial } from './policial';
 import { Multa } from './multa';
 import { Rodovia } from './rodovia';
 export interface Acidente {
-  id: String;
+  id: string;
   rodovia: Rodovia;
   multas: Multa[];
   policial: Policial;

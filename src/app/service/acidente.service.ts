@@ -19,13 +19,15 @@ export class AcidenteService {
     idCondutor: string,
     idPolicial: string,
     idRodovia: string,
-    idVeiculo: string
+    idVeiculo: string,
+    dataDoAcidente: string
   ): Observable<Acidente> {
     return this.http.post<Acidente>(this.url + 'cadastrar', {
       idCondutor,
       idPolicial,
       idRodovia,
       idVeiculo,
+      dataDoAcidente,
     });
   }
 
@@ -33,5 +35,9 @@ export class AcidenteService {
     return this.http.put<Acidente>(this.url + 'adicionar-multa/' + id, {
       idsMultas: [idMulta],
     });
+  }
+
+  remover(id: string): Observable<Acidente> {
+    return this.http.delete<Acidente>(this.url + 'remover/' + id);
   }
 }

@@ -34,7 +34,6 @@
 
     <table class="tabelinha">
       <tr>
-        <th>ID</th>
         <th>Nome</th>
         <th>Idade</th>
         <th>Data de Nascimento</th>
@@ -44,7 +43,6 @@
         <th>Ações</th>
       </tr>
       <tr *ngFor="let condutor of list">
-        <td>{{ condutor.id }}</td>
         <td>{{ condutor.nome }}</td>
         <td>{{ condutor.idade }}</td>
         <td>{{ condutor.dataDeNascimento | date: "dd/MM/yyyy" }}</td>

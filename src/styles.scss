@@ -70,10 +70,11 @@ body {
   padding: 15px 0;
   outline: 2px solid;
   outline-color: rgb(0, 0, 0);
+
   input {
     width: 300px;
     margin: 10px auto;
-    padding: 10px;
+    padding: auto;
     font-size: 22px;
     border: solid 1px rgb(199, 195, 195);
     display: block;
@@ -92,7 +93,7 @@ body {
   select {
     width: 300px;
     margin: 10px auto;
-    padding: 10px;
+    padding: auto;
     font-size: 22px;
     border: solid 1px rgb(199, 195, 195);
     display: block;

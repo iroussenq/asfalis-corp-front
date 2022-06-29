@@ -1,6 +1,5 @@
 import { AcidenteComponent } from './acidente/acidente.component';
 import { VeiculoComponent } from './veiculo/veiculo.component';
-import { MultaComponent } from './multa/multa.component';
 import { RodoviaComponent } from './rodovia/rodovia.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,7 +14,6 @@ const routes: Routes = [
   { path: 'condutor', component: CondutorComponent },
   { path: 'policial', component: PolicialComponent },
   { path: 'veiculo', component: VeiculoComponent },
-  { path: 'multa', component: MultaComponent },
   { path: 'rodovia', component: RodoviaComponent },
   { path: 'informacoes-legais', component: SobreComponent },
 ];

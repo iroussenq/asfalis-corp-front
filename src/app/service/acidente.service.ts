@@ -20,7 +20,9 @@ export class AcidenteService {
     idPolicial: string,
     idRodovia: string,
     idVeiculo: string,
-    dataDoAcidente: string
+    dataDoAcidente: string,
+    relatorio: string,
+    casualidades: number
   ): Observable<Acidente> {
     return this.http.post<Acidente>(this.url + 'cadastrar', {
       idCondutor,
@@ -28,6 +30,8 @@ export class AcidenteService {
       idRodovia,
       idVeiculo,
       dataDoAcidente,
+      relatorio,
+      casualidades,
     });
   }
 

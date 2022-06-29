@@ -1,10 +1,8 @@
-import { MultaService } from './../service/multa.service';
 import { RodoviaService } from './../service/rodovia.service';
 import { VeiculoService } from './../service/veiculo.service';
 import { PolicialService } from './../service/policial.service';
 import { CondutorService } from './../service/condutor.service';
 import { AcidenteService } from './../service/acidente.service';
-import { Multa } from './../domain/multa';
 import { Rodovia } from './../domain/rodovia';
 import { Veiculo } from './../domain/veiculo';
 import { Policial } from './../domain/policial';
@@ -29,7 +27,6 @@ export class AcidenteComponent implements OnInit {
   policiais: Policial[] = [];
   rodovias: Rodovia[] = [];
   veiculos: Veiculo[] = [];
-  multas: Multa[] = [];
 
   formAcidente: FormGroup = this.formBuilder.group({
     id: new FormControl(null),
@@ -38,11 +35,8 @@ export class AcidenteComponent implements OnInit {
     idRodovia: new FormControl('', [Validators.required]),
     idVeiculo: new FormControl('', [Validators.required]),
     dataDoAcidente: new FormControl(null, [Validators.required]),
-  });
-
-  formAddMulta: FormGroup = this.formBuilder.group({
-    idAcidente: new FormControl('', [Validators.required]),
-    idMulta: new FormControl('', [Validators.required]),
+    relatorio: new FormControl(null, [Validators.required]),
+    casualidades: new FormControl(null, [Validators.required]),
   });
 
   constructor(
@@ -51,8 +45,7 @@ export class AcidenteComponent implements OnInit {
     private condutorService: CondutorService,
     private policialService: PolicialService,
     private veiculoService: VeiculoService,
-    private rodoviaService: RodoviaService,
-    private multaService: MultaService
+    private rodoviaService: RodoviaService
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +54,6 @@ export class AcidenteComponent implements OnInit {
     this.consultarPoliciais();
     this.consultarRodovias();
     this.consultarVeiculos();
-    this.consultarMultas();
   }
 
   private consultarAcidentes(): void {
@@ -94,12 +86,6 @@ export class AcidenteComponent implements OnInit {
     });
   }
 
-  private consultarMultas(): void {
-    this.multaService.consultar().subscribe((x) => {
-      this.multas = x;
-    });
-  }
-
   cadastrar(): void {
     if (this.formAcidente.valid) {
       const idCondutor = this.formAcidente.controls['idCondutor'].value;
@@ -107,8 +93,19 @@ export class AcidenteComponent implements OnInit {
       const idRodovia = this.formAcidente.controls['idRodovia'].value;
       const idVeiculo = this.formAcidente.controls['idVeiculo'].value;
       const dataDoAcidente = this.formAcidente.controls['dataDoAcidente'].value;
+      const relatorio = this.formAcidente.controls['relatorio'].value;
+      const casualidades = this.formAcidente.controls['casualidades'].value;
+
       this.acidenteService
-        .cadastrar(idCondutor, idPolicial, idRodovia, idVeiculo, dataDoAcidente)
+        .cadastrar(
+          idCondutor,
+          idPolicial,
+          idRodovia,
+          idVeiculo,
+          dataDoAcidente,
+          relatorio,
+          casualidades
+        )
         .subscribe((acidente: Acidente) => {
           this.acidentes.push(acidente);
           this.resetForm();
@@ -126,28 +123,14 @@ export class AcidenteComponent implements OnInit {
       });
   }
 
-  clickAddMulta(acidente: Acidente) {
-    this.formAddMulta.controls['idAcidente'].setValue(acidente.id);
-  }
-
-  addMultas(): void {
-    if (this.formAddMulta.valid) {
-      const idAcidente = this.formAddMulta.controls['idAcidente'].value;
-      const idMulta = this.formAddMulta.controls['idAcidente'].value;
-      this.acidenteService.adicionarMulta(idAcidente, idMulta).subscribe(() => {
-        this.consultarAcidentes();
-        this.resetForm();
-      });
-    }
-  }
-
   resetForm(): void {
     this.formAcidente.reset();
     this.formAcidente.controls['idCondutor'].setValue('');
     this.formAcidente.controls['idPolicial'].setValue('');
     this.formAcidente.controls['idRodovia'].setValue('');
     this.formAcidente.controls['idVeiculo'].setValue('');
-    this.formAddMulta.reset();
-    this.formAddMulta.controls['idMulta'].setValue('');
+    this.formAcidente.controls['dataDoAcidente'].setValue('');
+    this.formAcidente.controls['relatorio'].setValue('');
+    this.formAcidente.controls['casualidades'].setValue('');
   }
 }

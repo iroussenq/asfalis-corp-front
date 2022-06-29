@@ -36,11 +36,19 @@
         placeholder="Data do Acidente"
         type="date"
       />
+      <input formControlName="relatorio" placeholder="Relatorio" type="text" />
+      <input
+        formControlName="casualidades"
+        placeholder="Casualidades"
+        type="number"
+        maxlength="4"
+      />
       <button type="submit" [disabled]="!formAcidente.valid">Cadastrar</button>
     </form>
 
     <table class="tabelinha">
       <tr>
+        <th>Relatorio</th>
         <th>Policial</th>
         <th>Patente do Policial</th>
         <th>Idade do Policial</th>
@@ -48,11 +56,12 @@
         <th>CPF do Condutor</th>
         <th>Idade do Condutor</th>
         <th>Condutor embriagado?</th>
-        <th>Mortes na Rodovia</th>
+        <th>Casualidades</th>
         <th>Data do Acidente</th>
         <th>Ações</th>
       </tr>
       <tr *ngFor="let item of acidentes">
+        <td>{{ item.relatorio }}</td>
         <td>{{ item.policial.nome }}</td>
         <td>{{ item.policial.patente }}</td>
         <td>{{ item.policial.idade }}</td>
@@ -60,29 +69,18 @@
         <td>{{ item.condutor.cpf }}</td>
         <td>{{ item.condutor.idade }}</td>
         <td>{{ item.condutor.statusCondutor }}</td>
-        <td>{{ item.rodovia.mortes }}</td>
+        <td>{{ item.casualidades }}</td>
         <td>{{ item.dataDoAcidente }}</td>
         <td>
-          <button (click)="clickAddMulta(item)">Adiciona Multa</button>
           <button (click)="remover(item)">Remover</button>
-          <button (click)="clickAddMulta(item)">Adiciona Multa</button>
-          <button>Detalhes</button>
         </td>
       </tr>
     </table>
   </div>
-
-  <div class="modal" *ngIf="formAddMulta.controls['idAcidente'].value">
-    <form class="form-box" [formGroup]="formAddMulta" (ngSubmit)="addMultas()">
-      <p class="fechar" (click)="resetForm()">X</p>
-      <select formControlName="idMulta">
-        <option value="">Selecione um Produto</option>
-        <option *ngFor="let item of multas" value="{{ item.id }}">
-          {{ item.condicaoDaMulta }}
-        </option>
-      </select>
-      <button type="submit" [disabled]="!formAddMulta.valid">Adicionar</button>
-    </form>
-    <div class="fundo"></div>
+  <div *ngIf="formAcidente.valid">
+    <p class="texto1">Informações enviaveis</p>
+  </div>
+  <div *ngIf="!formAcidente.valid">
+    <p class="texto2">Informações não enviaveis</p>
   </div>
 </div>

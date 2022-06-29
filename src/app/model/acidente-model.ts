@@ -4,4 +4,6 @@ export interface AcidenteModel {
   idRodovia: string;
   idVeiculo: string;
   dataDoAcidente: string;
+  relatorio: string;
+  casualidades: number;
 }

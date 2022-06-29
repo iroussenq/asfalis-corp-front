@@ -1,7 +1,6 @@
 import { AcidenteModule } from './acidente/acidente.module';
 import { VeiculoModule } from './veiculo/veiculo.module';
 import { RodoviaModule } from './rodovia/rodovia.module';
-import { MultaModule } from './multa/multa.module';
 import { PolicialModule } from './policial/policial.module';
 import { CondutorModule } from './condutor/condutor.module';
 import { MenuModule } from './menu/menu.module';
@@ -23,10 +22,9 @@ import { AppComponent } from './app.component';
     MenuModule,
     CondutorModule,
     PolicialModule,
-    MultaModule,
     RodoviaModule,
     VeiculoModule,
-    AcidenteModule
+    AcidenteModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -11,7 +11,17 @@
     width: 90%;
     height: 10px;
     border: 2px solid;
-    padding: 4px 9px;
+    padding: 4px 4px;
     background-color: 5c696f;
+  }
+  table {
+    background-color: rgb(25, 68, 109);
+  }
+  th {
+    background-color: rgb(25, 68, 109);
+  }
+  td {
+    background-color: rgb(204, 203, 203);
+    text-align: center;
   }
 }

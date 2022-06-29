@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
     PolicialModule,
     MultaModule,
     RodoviaModule,
-    VeiculoModule
+    VeiculoModule,
     AcidenteModule
   ],
   providers: [],

@@ -1,3 +1,9 @@
+import { MultaService } from './../service/multa.service';
+import { RodoviaService } from './../service/rodovia.service';
+import { VeiculoService } from './../service/veiculo.service';
+import { PolicialService } from './../service/policial.service';
+import { CondutorService } from './../service/condutor.service';
+import { AcidenteService } from './../service/acidente.service';
 import { Multa } from './../domain/multa';
 import { Rodovia } from './../domain/rodovia';
 import { Veiculo } from './../domain/veiculo';
@@ -34,82 +40,102 @@ export class AcidenteComponent implements OnInit {
 
   formAddMulta: FormGroup = this.formBuilder.group({
     idAcidente: new FormControl('', [Validators.required]),
-    idProduto: new FormControl('', [Validators.required]),
+    idMulta: new FormControl('', [Validators.required]),
   });
 
   constructor(
     private formBuilder: FormBuilder,
-    private acidenteService: Acidentes,
-    private clienteService: ClienteService,
-    private farmaceuticoService: FarmaceuticoService,
-    private produtoService: ProdutoService
+    private acidenteService: AcidenteService,
+    private condutorService: CondutorService,
+    private policialService: PolicialService,
+    private veiculoService: VeiculoService,
+    private rodoviaService: RodoviaService,
+    private multaService: MultaService
   ) {}
 
   ngOnInit(): void {
-    this.consultarPedidos();
-    this.consultarClientes();
-    this.consultarFarmaceuticos();
-    this.consultarProdutos();
+    this.consultarAcidentes();
+    this.consultarCondutores();
+    this.consultarPoliciais();
+    this.consultarRodovias();
+    this.consultarVeiculos();
+    this.consultarMultas();
   }
 
-  private consultarPedidos(): void {
-    this.pedidoService.consultar().subscribe((x) => {
-      this.pedidos = x;
+  private consultarAcidentes(): void {
+    this.acidenteService.consultar().subscribe((x) => {
+      this.acidentes = x;
     });
   }
 
-  private consultarClientes(): void {
-    this.clienteService.consultar().subscribe((x) => {
-      this.clientes = x;
+  private consultarCondutores(): void {
+    this.condutorService.consultar().subscribe((x) => {
+      this.condutores = x;
     });
   }
 
-  private consultarFarmaceuticos(): void {
-    this.farmaceuticoService.consultar().subscribe((x) => {
-      this.farmaceuticos = x;
+  private consultarPoliciais(): void {
+    this.policialService.consultar().subscribe((x) => {
+      this.policiais = x;
     });
   }
 
-  private consultarProdutos(): void {
-    this.produtoService.consultar().subscribe((x) => {
-      this.produtos = x;
+  private consultarRodovias(): void {
+    this.rodoviaService.consultar().subscribe((x) => {
+      this.rodovias = x;
+    });
+  }
+
+  private consultarVeiculos(): void {
+    this.veiculoService.consultar().subscribe((x) => {
+      this.veiculos = x;
+    });
+  }
+
+  private consultarMultas(): void {
+    this.multaService.consultar().subscribe((x) => {
+      this.multas = x;
     });
   }
 
   cadastrar(): void {
-    if (this.form.valid) {
-      const idCliente = this.form.controls['idCliente'].value;
-      const idFarmaceutico = this.form.controls['idFarmaceutico'].value;
-      this.pedidoService
-        .cadastrar(idCliente, idFarmaceutico)
-        .subscribe((pedido: Pedido) => {
-          this.pedidos.push(pedido);
+    if (this.formAcidente.valid) {
+      const idCondutor = this.formAcidente.controls['idCliente'].value;
+      const idPolicial = this.formAcidente.controls['idPolicial'].value;
+      const idRodovia = this.formAcidente.controls['idRodovia'].value;
+      const idVeiculo = this.formAcidente.controls['idVeiculo'].value;
+      this.acidenteService
+        .cadastrar(idCondutor, idPolicial,idRodovia,idVeiculo)
+        .subscribe((acidente: Acidente) => {
+          this.acidentes.push(acidente);
           this.resetForm();
         });
     }
   }
 
-  clickAddProduto(pedido: Pedido) {
-    this.formAddProduto.controls['idPedido'].setValue(pedido.id);
+  clickAddMulta(acidente: Acidente) {
+    this.formAddMulta.controls['idAcidente'].setValue(acidente.id);
   }
 
-  addProduto(): void {
-    if (this.formAddProduto.valid) {
-      const idPedido = this.formAddProduto.controls['idPedido'].value;
-      const idProduto = this.formAddProduto.controls['idProduto'].value;
-      this.pedidoService.adicionarProduto(idPedido, idProduto).subscribe(() => {
-        this.consultarPedidos();
+  addMultas(): void {
+    if (this.formAddMulta.valid) {
+      const idAcidente = this.formAddMulta.controls['idAcidente'].value;
+      const idMulta = this.formAddMulta.controls['idAcidente'].value;
+      this.acidenteService.adicionarMulta(idAcidente, idMulta).subscribe(() => {
+        this.consultarAcidentes();
         this.resetForm();
       });
     }
   }
 
   resetForm(): void {
-    this.form.reset();
-    this.form.controls['idCliente'].setValue('');
-    this.form.controls['idFarmaceutico'].setValue('');
+    this.formAcidente.reset();
+    this.formAcidente.controls['idCondutor'].setValue('');
+    this.formAcidente.controls['idPolicial'].setValue('');
+    this.formAcidente.controls['idRodovia'].setValue('');
+    this.formAcidente.controls['idVeiculo'].setValue('');
 
-    this.formAddProduto.reset();
-    this.formAddProduto.controls['idProduto'].setValue('');
+    this.formAddMulta.reset();
+    this.formAddMulta.controls['idMulta'].setValue('');
   }
 }

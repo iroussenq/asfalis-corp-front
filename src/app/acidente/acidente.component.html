@@ -1,1 +1,88 @@
-<p>acidente works!</p>
+<div class="box">
+  <header>
+    <img class="imgheader" src="assets/logo.jpeg" alt="logo" />
+    <h1>AsfalisCorp</h1>
+  </header>
+  <p class="texto"> Cadastro de Acidentes</p>
+
+  <div class="formtabela">
+  <form class="form-box" [formGroup]="formAcidente" (ngSubmit)="cadastrar()">
+    <select formControlName="idCondutor">
+      <option value="">Selecione um Condutor</option>
+      <option *ngFor="let item of condutores" value="{{ item.id }}">
+        {{ item.nome }}
+      </option>
+    </select>
+    <select formControlName="idPolicial">
+      <option value="">Selecione um Policial</option>
+      <option *ngFor="let item of policiais" value="{{ item.id }}">
+        {{ item.nome }}
+      </option>
+    </select>
+    <select formControlName="idRodovia">
+      <option value="">Selecione uma Rodovia</option>
+      <option *ngFor="let item of rodovias" value="{{ item.id }}">
+        {{ item.nome }}
+      </option>
+    </select>
+    <select formControlName="idVeiculo">
+      <option value="">Selecione um Veiculo</option>
+      <option *ngFor="let item of veiculos" value="{{ item.id }}">
+        {{ item.nome }}
+      </option>
+    </select>
+    <button type="submit" [disabled]="!formAcidente.valid">Cadastrar</button>
+  </form>
+  <hr />
+
+  <table class="tabelinha">
+    <tr>
+      <th>Policial</th>
+      <th>Cliente</th>
+      <th>Veiculo</th>
+      <th>Rodovia</th>
+      <th>Condutor embriagado?</th>
+      <th>Mortes na Rodovia</th>
+      <th>Data do Acidente</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let item of acidentes">
+      <td>{{ item.policial.nome }}</td>
+      <td>{{ item.condutor.nome }}</td>
+      <td>{{ item.veiculo.nome }}</td>
+      <td>{{ item.rodovia.nome}}</td>
+      <td>{{ item.condutor.statusCondutor}}</td>
+      <td>{{ item.rodovia.mortes }}</td>
+      <td>{{ item.dataDoAcidente }}</td>
+      <td>
+        <button
+          (click)="clickAddMulta(item)"
+        >
+          Adiciona Multa
+        </button>
+        <button>Detalhes</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+  <div class="modal" *ngIf="formAddMulta.controls['idAcidente'].value">
+    <form
+      class="form-box"
+      [formGroup]="formAddMulta"
+      (ngSubmit)="addMultas()"
+    >
+      <p class="fechar" (click)="resetForm()">X</p>
+      <select formControlName="idMulta">
+        <option value="">Selecione um Produto</option>
+        <option *ngFor="let item of multas" value="{{ item.id }}">
+          {{ item.condicaoDaMulta }}
+        </option>
+      </select>
+      <button type="submit" [disabled]="!formAddMulta.valid">
+        Adicionar
+      </button>
+    </form>
+    <div class="fundo"></div>
+  </div>
+</div>

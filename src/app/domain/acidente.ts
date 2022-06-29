@@ -1,3 +1,4 @@
+import { Veiculo } from './veiculo';
 import { Condutor } from './condutor';
 import { Policial } from './policial';
 import { Multa } from './multa';
@@ -7,6 +8,7 @@ export interface Acidente {
   rodovia: Rodovia;
   multas: Multa[];
   policial: Policial;
+  veiculo: Veiculo;
   condutor: Condutor;
   dataDoAcidente: Date;
 }

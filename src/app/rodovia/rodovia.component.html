@@ -39,11 +39,10 @@
       </tr>
     </table>
   </div>
-  <p class="texto">
-    {{
-      formRodovia.valid
-        ? "Informações enviaveis para central"
-        : "Informações não enviaveis para central"
-    }}
-  </p>
+  <div *ngIf="formRodovia.valid">
+    <p class="texto1">Informações enviaveis</p>
+  </div>
+  <div *ngIf="!formRodovia.valid">
+    <p class="texto2">Informações não enviaveis</p>
+  </div>
 </div>

@@ -44,11 +44,10 @@
       </tr>
     </table>
   </div>
-  <p class="texto">
-    {{
-      formVeiculo.valid
-        ? "Informações enviaveis para Central "
-        : "Informações não enviaveis para Central "
-    }}
-  </p>
+  <div *ngIf="formVeiculo.valid">
+    <p class="texto1">Informações enviaveis</p>
+  </div>
+  <div *ngIf="!formVeiculo.valid">
+    <p class="texto2">Informações não enviaveis</p>
+  </div>
 </div>

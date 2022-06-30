@@ -6,31 +6,34 @@
   <p class="texto">Cadastro de Rodovia</p>
   <div class="formtabela">
     <form class="form-box" [formGroup]="formRodovia" (ngSubmit)="cadastrar()">
+      <p class="texto">Nome</p>
       <input
         formControlName="nome"
         placeholder="Nome"
         type="text"
         maxlength="64"
       />
+      <p class="texto">Cep</p>
       <input
-        formControlName="km"
-        placeholder="KM"
-        type="number"
-        maxlength="4"
+        formControlName="cep"
+        placeholder="CEP"
+        type="text"
+        maxlength="9"
       />
+      <p class="texto">Mortes na rodovia</p>
       <input formControlName="mortes" placeholder="Mortes" type="number" />
       <button type="submit" [disabled]="!formRodovia.valid">Cadastrar</button>
     </form>
     <table class="tabela">
       <tr>
         <th>Nome</th>
-        <th>Km</th>
+        <th>CEP</th>
         <th>Mortes</th>
         <th>Ações</th>
       </tr>
       <tr *ngFor="let rodovia of list">
         <td>{{ rodovia.nome }}</td>
-        <td>{{ rodovia.km }}</td>
+        <td>{{ rodovia.cep }}</td>
         <td>{{ rodovia.mortes }}</td>
         <td>
           <button (click)="editar(rodovia)">Editar</button>

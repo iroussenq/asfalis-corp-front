@@ -21,7 +21,11 @@ export class RodoviaComponent implements OnInit {
   formRodovia: FormGroup = this.formBuilder.group({
     id: new FormControl(null),
     nome: new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    km: new FormControl(null, [Validators.required, Validators.minLength(1)]),
+    cep: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(/^[0-9]{8}$/),
+    ]),
     mortes: new FormControl(null, [Validators.required]),
   });
 
@@ -60,7 +64,7 @@ export class RodoviaComponent implements OnInit {
   editar(rodovia: Rodovia) {
     this.formRodovia.controls['id'].setValue(rodovia.id);
     this.formRodovia.controls['nome'].setValue(rodovia.nome);
-    this.formRodovia.controls['km'].setValue(rodovia.km);
+    this.formRodovia.controls['cep'].setValue(rodovia.cep);
     this.formRodovia.controls['mortes'].setValue(rodovia.mortes);
   }
 

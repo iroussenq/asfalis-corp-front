@@ -1,5 +1,5 @@
 export interface RodoviaModel {
   nome: string;
-  km: number;
+  cep: string;
   mortes: number;
 }

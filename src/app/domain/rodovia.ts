@@ -1,6 +1,6 @@
 export interface Rodovia {
   id: string;
   nome: string;
-  km: number;
+  cep: string;
   mortes: number;
 }

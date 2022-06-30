@@ -7,36 +7,43 @@
 
   <div class="formtabela">
     <form class="form-box" [formGroup]="formAcidente" (ngSubmit)="cadastrar()">
+      <p class="texto">Condutor</p>
       <select formControlName="idCondutor">
-        <option value="">Selecione um Condutor</option>
+        <option value="">Condutor</option>
         <option *ngFor="let item of condutores" value="{{ item.id }}">
           {{ item.nome }}
         </option>
       </select>
+      <p class="texto">Policial</p>
       <select formControlName="idPolicial">
         <option value="">Selecione um Policial</option>
         <option *ngFor="let item of policiais" value="{{ item.id }}">
           {{ item.nome }}
         </option>
       </select>
+      <p class="texto">Rodovia</p>
       <select formControlName="idRodovia">
         <option value="">Selecione uma Rodovia</option>
         <option *ngFor="let item of rodovias" value="{{ item.id }}">
           {{ item.nome }}
         </option>
       </select>
+      <p class="texto">Veiculo</p>
       <select formControlName="idVeiculo">
         <option value="">Selecione um Veiculo</option>
         <option *ngFor="let item of veiculos" value="{{ item.id }}">
           {{ item.nome }}
         </option>
       </select>
+      <p class="texto">Data do Acidente</p>
       <input
         formControlName="dataDoAcidente"
         placeholder="Data do Acidente"
         type="date"
       />
+      <p class="texto">Relatorio do Acidente</p>
       <input formControlName="relatorio" placeholder="Relatorio" type="text" />
+      <p class="texto">Numero de mortos</p>
       <input
         formControlName="casualidades"
         placeholder="Casualidades"

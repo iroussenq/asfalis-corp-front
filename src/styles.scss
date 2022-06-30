@@ -46,6 +46,15 @@ body {
   font-family: "Cutive Mono", monospace;
   color: rgb(0, 0, 0);
 }
+.nextElement {
+  background-color: #e67224;
+  border: 2px solid black;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  font-family: "Cutive Mono", monospace;
+  color: rgb(0, 0, 0);
+}
 .texto1 {
   background-color: #15aa02;
   border: 2px solid black;
@@ -74,7 +83,7 @@ body {
   input {
     width: 300px;
     margin: 10px auto;
-    padding: auto;
+    padding: 10px;
     font-size: 22px;
     border: solid 1px rgb(199, 195, 195);
     display: block;
@@ -93,7 +102,7 @@ body {
   select {
     width: 300px;
     margin: 10px auto;
-    padding: auto;
+    padding: px;
     font-size: 22px;
     border: solid 1px rgb(199, 195, 195);
     display: block;

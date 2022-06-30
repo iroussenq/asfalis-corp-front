@@ -6,18 +6,21 @@
   <p class="texto">Cadastro de Policial</p>
   <div class="formtabela">
     <form class="form-box" [formGroup]="formPolicial" (ngSubmit)="cadastrar()">
+      <p class="texto">Nome</p>
       <input
         formControlName="nome"
         placeholder="Nome"
         type="text"
         maxlength="64"
       />
+      <p class="texto">CPF</p>
       <input
         formControlName="cpf"
         placeholder="CPF"
         type="text"
         maxlength="14"
       />
+      <p class="texto">Patente</p>
       <select formControlName="patente" type="option">
         <option value="Soldado">Soldado</option>
         <option value="Cabo">Cabo</option>
@@ -31,7 +34,7 @@
         <option value="Tenente Coronel">Tenente Coronel</option>
         <option value="Coronel">Coronel</option>
       </select>
-
+      <p class="texto">Data De Nascimento</p>
       <input
         formControlName="dataDeNascimento"
         placeholder="Data de Nascimento"

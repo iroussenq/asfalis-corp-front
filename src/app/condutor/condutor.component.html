@@ -7,23 +7,26 @@
 
   <div class="formtabela">
     <form class="form-box" [formGroup]="formCondutor" (ngSubmit)="cadastrar()">
+      <p class="texto">Nome</p>
       <input
         formControlName="nome"
         placeholder="Nome"
         type="text"
         maxlength="64"
       />
+      <p class="texto">CPF</p>
       <input
         formControlName="cpf"
         placeholder="CPF"
         type="text"
         maxlength="14"
       />
+      <p class="texto">Status do Condutor</p>
       <select formControlName="statusCondutor" type="option">
         <option value="EMBRIAGADO">Embriagado</option>
         <option value="NAO_EMBRIAGADO">Não Embriagado</option>
       </select>
-
+      <p class="texto">Data De Nascimento</p>
       <input
         formControlName="dataDeNascimento"
         placeholder="Data de Nascimento"

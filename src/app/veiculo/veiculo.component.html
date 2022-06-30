@@ -6,18 +6,21 @@
   <p class="texto">Cadastro de Veiculo</p>
   <div class="formtabela">
     <form class="form-box" [formGroup]="formVeiculo" (ngSubmit)="cadastrar()">
+      <p class="texto">Nome do Veiculo</p>
       <input
         formControlName="nome"
         placeholder="Nome"
         type="text"
         maxlength="64"
       />
+      <p class="texto">Placa do Veiculo</p>
       <input
         formControlName="placa"
         placeholder="Placa"
         type="text"
         maxlength="8"
       />
+      <p class="texto">Ano Do Veiculo</p>
       <input
         formControlName="ano"
         placeholder="Ano do Veiculo"

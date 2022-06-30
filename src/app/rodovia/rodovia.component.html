@@ -4,6 +4,7 @@
     <h1>AsfalisCorp</h1>
   </header>
   <p class="texto">Cadastro de Rodovia</p>
+
   <div class="formtabela">
     <form class="form-box" [formGroup]="formRodovia" (ngSubmit)="cadastrar()">
       <p class="texto">Nome</p>
@@ -24,6 +25,7 @@
       <input formControlName="mortes" placeholder="Mortes" type="number" />
       <button type="submit" [disabled]="!formRodovia.valid">Cadastrar</button>
     </form>
+
     <table class="tabela">
       <tr>
         <th>Nome</th>
@@ -48,4 +50,14 @@
   <div *ngIf="!formRodovia.valid">
     <p class="texto2">Informações não enviaveis</p>
   </div>
+
+  <nav>
+    <ul class="nextElement">
+      <li>
+        <a class="nextElement" routerLink="/veiculo"> Anterior</a>
+        <span>&nbsp;</span>
+        <a class="nextElement" routerLink="/acidente">Proximo</a>
+      </li>
+    </ul>
+  </nav>
 </div>

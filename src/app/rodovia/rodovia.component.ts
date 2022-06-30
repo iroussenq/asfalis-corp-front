@@ -24,7 +24,7 @@ export class RodoviaComponent implements OnInit {
     cep: new FormControl(null, [
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern(/^[0-9]{8}$/),
+      Validators.pattern(/^[0-9]{5}-[0-9]{3}$/),
     ]),
     mortes: new FormControl(null, [Validators.required]),
   });

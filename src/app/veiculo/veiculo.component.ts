@@ -21,8 +21,8 @@ export class VeiculoComponent implements OnInit {
     nome: new FormControl(null, [Validators.required, Validators.minLength(2)]),
     placa: new FormControl(null, [
       Validators.required,
-      Validators.minLength(8),
-      Validators.pattern(/[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/),
+      Validators.minLength(7),
+      Validators.pattern(/^[a-zA-Z]{3}[0-9][A-Za-z0-9][0-9]{2}$/),
     ]),
     ano: new FormControl(null, [Validators.required, Validators.minLength(4)]),
   });

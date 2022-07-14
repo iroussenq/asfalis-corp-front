@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RodoviaModel } from '../model/rodovia-model';
-import { Rodovia } from '../domain/rodovia';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +11,19 @@ export class RodoviaService {
 
   constructor(private http: HttpClient) {}
 
-  cadastrar(rodoviaModel: RodoviaModel): Observable<Rodovia> {
-    return this.http.post<Rodovia>(this.url + 'cadastrar', rodoviaModel);
+  cadastrar(rodoviaModel: RodoviaModel): Observable<RodoviaModel> {
+    return this.http.post<RodoviaModel>(this.url + 'cadastrar', rodoviaModel);
   }
 
-  consultar(): Observable<Rodovia[]> {
-    return this.http.get<Rodovia[]>(this.url + 'consultar');
+  consultar(): Observable<RodoviaModel[]> {
+    return this.http.get<RodoviaModel[]>(this.url + 'consultar');
   }
 
-  editar(id: string, model: RodoviaModel): Observable<Rodovia> {
-    return this.http.put<Rodovia>(this.url + 'alterar/' + id, model);
+  alterar(id: string, model: RodoviaModel): Observable<RodoviaModel> {
+    return this.http.put<RodoviaModel>(this.url + 'alterar', model);
   }
 
-  excluir(id: string): Observable<Rodovia> {
-    return this.http.delete<Rodovia>(this.url + 'remover/' + id);
+  remover(id: string): Observable<RodoviaModel> {
+    return this.http.delete<RodoviaModel>(this.url + 'remover/' + id);
   }
 }

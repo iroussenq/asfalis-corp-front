@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CondutorModel } from '../model/condutor-model';
 import { Observable } from 'rxjs';
-import { Condutor } from '../domain/condutor';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +11,19 @@ export class CondutorService {
 
   constructor(private http: HttpClient) {}
 
-  cadastrar(model: CondutorModel): Observable<Condutor> {
-    return this.http.post<Condutor>(this.url + 'cadastrar', model);
+  cadastrar(model: CondutorModel): Observable<CondutorModel> {
+    return this.http.post<CondutorModel>(this.url + 'cadastrar', model);
   }
 
-  alterar(id: string, model: CondutorModel): Observable<Condutor> {
-    return this.http.put<Condutor>(this.url + 'alterar/' + id, model);
+  alterar(id: string, model: CondutorModel): Observable<CondutorModel> {
+    return this.http.put<CondutorModel>(this.url + 'alterar', model);
   }
 
-  consultar(): Observable<Condutor[]> {
-    return this.http.get<Condutor[]>(this.url + 'consultar');
+  consultar(): Observable<CondutorModel[]> {
+    return this.http.get<CondutorModel[]>(this.url + 'consultar');
   }
 
-  remover(id: string): Observable<Condutor> {
-    return this.http.delete<Condutor>(this.url + 'remover/' + id);
+  remover(id: string): Observable<CondutorModel> {
+    return this.http.delete<CondutorModel>(this.url + 'remover/' + id);
   }
 }

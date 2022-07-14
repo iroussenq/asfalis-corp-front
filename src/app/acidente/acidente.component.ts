@@ -1,13 +1,13 @@
+import { VeiculoModel } from './../model/veiculo-model';
+import { RodoviaModel } from './../model/rodovia-model';
+import { PolicialModel } from './../model/policial-model';
+import { CondutorModel } from './../model/condutor-model';
+import { AcidenteModel } from './../model/acidente-model';
 import { RodoviaService } from './../service/rodovia.service';
 import { VeiculoService } from './../service/veiculo.service';
 import { PolicialService } from './../service/policial.service';
 import { CondutorService } from './../service/condutor.service';
 import { AcidenteService } from './../service/acidente.service';
-import { Rodovia } from './../domain/rodovia';
-import { Veiculo } from './../domain/veiculo';
-import { Policial } from './../domain/policial';
-import { Condutor } from './../domain/condutor';
-import { Acidente } from './../domain/acidente';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -22,11 +22,11 @@ import {
   styleUrls: ['./acidente.component.scss'],
 })
 export class AcidenteComponent implements OnInit {
-  acidentes: Acidente[] = [];
-  condutores: Condutor[] = [];
-  policiais: Policial[] = [];
-  rodovias: Rodovia[] = [];
-  veiculos: Veiculo[] = [];
+  acidentes: AcidenteModel[] = [];
+  condutores: CondutorModel[] = [];
+  policiais: PolicialModel[] = [];
+  rodovias: RodoviaModel[] = [];
+  veiculos: VeiculoModel[] = [];
 
   formAcidente: FormGroup = this.formBuilder.group({
     id: new FormControl(null),
@@ -106,17 +106,17 @@ export class AcidenteComponent implements OnInit {
           relatorio,
           casualidades
         )
-        .subscribe((acidente: Acidente) => {
+        .subscribe((acidente: AcidenteModel) => {
           this.acidentes.push(acidente);
           this.resetForm();
         });
     }
   }
 
-  remover(acidente: Acidente): void {
+  remover(acidente: AcidenteModel): void {
     this.acidenteService
       .remover(acidente.id)
-      .subscribe((acidente: Acidente) => {
+      .subscribe((acidente: AcidenteModel) => {
         if (acidente.id) {
           this.ngOnInit();
         }

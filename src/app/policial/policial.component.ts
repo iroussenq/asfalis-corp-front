@@ -1,6 +1,5 @@
 import { PolicialService } from './../service/policial.service';
 import { PolicialModel } from './../model/policial-model';
-import { Policial } from './../domain/policial';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -14,7 +13,7 @@ import {
   styleUrls: ['./policial.component.scss'],
 })
 export class PolicialComponent implements OnInit {
-  list: Policial[] = [];
+  list: PolicialModel[] = [];
 
   formPolicial: FormGroup = this.formBuilder.group({
     id: new FormControl(null),
@@ -34,7 +33,7 @@ export class PolicialComponent implements OnInit {
   }
 
   private carregaTabela(): void {
-    this.policialService.consultar().subscribe((domains: Policial[]) => {
+    this.policialService.consultar().subscribe((domains: PolicialModel[]) => {
       this.list = domains;
     });
   }
@@ -45,7 +44,7 @@ export class PolicialComponent implements OnInit {
     if (id) {
       this.policialService
         .alterar(id, policialModel)
-        .subscribe((domain: Policial) => {
+        .subscribe((domain: PolicialModel) => {
           if (domain.id) {
             this.carregaTabela();
             this.formPolicial.reset();
@@ -54,7 +53,7 @@ export class PolicialComponent implements OnInit {
     } else {
       this.policialService
         .cadastrar(policialModel)
-        .subscribe((domain: Policial) => {
+        .subscribe((domain: PolicialModel) => {
           if (domain.id) {
             this.list.push(domain);
             this.formPolicial.reset();
@@ -63,7 +62,7 @@ export class PolicialComponent implements OnInit {
     }
   }
 
-  editar(policial: Policial): void {
+  editar(policial: PolicialModel): void {
     this.formPolicial.controls['id'].setValue(policial.id);
     this.formPolicial.controls['nome'].setValue(policial.nome);
     this.formPolicial.controls['cpf'].setValue(policial.cpf);
@@ -73,10 +72,10 @@ export class PolicialComponent implements OnInit {
     );
   }
 
-  remover(policial: Policial): void {
+  remover(policial: PolicialModel): void {
     this.policialService
       .remover(policial.id)
-      .subscribe((policial: Policial) => {
+      .subscribe((policial: PolicialModel) => {
         if (policial.id) {
           this.carregaTabela();
         }

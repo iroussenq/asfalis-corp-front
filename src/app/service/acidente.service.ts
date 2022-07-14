@@ -1,4 +1,4 @@
-import { Acidente } from './../domain/acidente';
+import { AcidenteModel } from './../model/acidente-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,8 +11,8 @@ export class AcidenteService {
 
   constructor(private http: HttpClient) {}
 
-  consultar(): Observable<Acidente[]> {
-    return this.http.get<Acidente[]>(this.url + 'consultar');
+  consultar(): Observable<AcidenteModel[]> {
+    return this.http.get<AcidenteModel[]>(this.url + 'consultar');
   }
 
   cadastrar(
@@ -23,25 +23,19 @@ export class AcidenteService {
     dataDoAcidente: string,
     relatorio: string,
     casualidades: number
-  ): Observable<Acidente> {
-    return this.http.post<Acidente>(this.url + 'cadastrar', {
-      idCondutor,
-      idPolicial,
-      idRodovia,
-      idVeiculo,
-      dataDoAcidente,
-      relatorio,
-      casualidades,
+  ): Observable<AcidenteModel> {
+    return this.http.post<AcidenteModel>(this.url + 'cadastrar', {
+      condutor: { id: idCondutor },
+      policial: { id: idPolicial },
+      rodovia: { id: idRodovia },
+      veiculo: { id: idVeiculo },
+      dataDoAcidente: dataDoAcidente,
+      relatorio: relatorio,
+      casualidades: casualidades,
     });
   }
 
-  adicionarMulta(id: string, idMulta: string): Observable<Acidente> {
-    return this.http.put<Acidente>(this.url + 'adicionar-multa/' + id, {
-      idsMultas: [idMulta],
-    });
-  }
-
-  remover(id: string): Observable<Acidente> {
-    return this.http.delete<Acidente>(this.url + 'remover/' + id);
+  remover(id: string): Observable<AcidenteModel> {
+    return this.http.delete<AcidenteModel>(this.url + 'remover/' + id);
   }
 }

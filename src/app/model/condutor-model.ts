@@ -1,6 +1,9 @@
 export interface CondutorModel {
+  id: string;
   nome: string;
   dataDeNascimento: string;
-  cpf: string;
   statusCondutor: string;
+  cpf: string;
+  idade?: string;
+  documentoValido?: boolean;
 }

@@ -1,4 +1,3 @@
-import { Veiculo } from './../domain/veiculo';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { VeiculoModel } from '../model/veiculo-model';
@@ -12,19 +11,19 @@ export class VeiculoService {
 
   constructor(private http: HttpClient) {}
 
-  cadastrar(model: VeiculoModel): Observable<Veiculo> {
-    return this.http.post<Veiculo>(this.url + 'cadastrar', model);
+  cadastrar(model: VeiculoModel): Observable<VeiculoModel> {
+    return this.http.post<VeiculoModel>(this.url + 'cadastrar', model);
   }
 
-  alterar(id: string, model: VeiculoModel): Observable<Veiculo> {
-    return this.http.put<Veiculo>(this.url + 'alterar/' + id, model);
+  alterar(id: string, model: VeiculoModel): Observable<VeiculoModel> {
+    return this.http.put<VeiculoModel>(this.url + 'alterar', model);
   }
 
-  consultar(): Observable<Veiculo[]> {
-    return this.http.get<Veiculo[]>(this.url + 'consultar');
+  consultar(): Observable<VeiculoModel[]> {
+    return this.http.get<VeiculoModel[]>(this.url + 'consultar');
   }
 
-  remover(id: string): Observable<Veiculo> {
-    return this.http.delete<Veiculo>(this.url + 'remover/' + id);
+  remover(id: string): Observable<VeiculoModel> {
+    return this.http.delete<VeiculoModel>(this.url + 'remover/' + id);
   }
 }

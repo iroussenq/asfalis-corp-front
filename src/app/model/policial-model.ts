@@ -1,6 +1,9 @@
 export interface PolicialModel {
+  id: string;
   nome: string;
-  niver: string;
-  cpf: string;
+  dataDeNascimento: string;
   patente: string;
+  cpf: string;
+  idade?: string;
+  documentoValido?: boolean;
 }

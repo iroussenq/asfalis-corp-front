@@ -9,7 +9,7 @@
     <form class="form-box" [formGroup]="formAcidente" (ngSubmit)="cadastrar()">
       <p class="texto">Condutor</p>
       <select formControlName="idCondutor">
-        <option value="">Condutor</option>
+        <option value="">Selecione um Condutor</option>
         <option *ngFor="let item of condutores" value="{{ item.id }}">
           {{ item.nome }}
         </option>

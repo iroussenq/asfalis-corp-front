@@ -8,7 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Condutor } from './../domain/condutor';
 import { CondutorModel } from '../model/condutor-model';
 
 @Component({
@@ -17,7 +16,7 @@ import { CondutorModel } from '../model/condutor-model';
   styleUrls: ['./condutor.component.scss'],
 })
 export class CondutorComponent implements OnInit {
-  list: Condutor[] = [];
+  list: CondutorModel[] = [];
 
   formCondutor: FormGroup = this.formBuilder.group({
     id: new FormControl(null),
@@ -37,7 +36,7 @@ export class CondutorComponent implements OnInit {
   }
 
   private carregaTabela(): void {
-    this.condutorService.consultar().subscribe((domains: Condutor[]) => {
+    this.condutorService.consultar().subscribe((domains: CondutorModel[]) => {
       this.list = domains;
     });
   }
@@ -48,7 +47,7 @@ export class CondutorComponent implements OnInit {
     if (id) {
       this.condutorService
         .alterar(id, condutorModel)
-        .subscribe((domain: Condutor) => {
+        .subscribe((domain: CondutorModel) => {
           if (domain.id) {
             this.carregaTabela();
             this.formCondutor.reset();
@@ -57,7 +56,7 @@ export class CondutorComponent implements OnInit {
     } else {
       this.condutorService
         .cadastrar(condutorModel)
-        .subscribe((domain: Condutor) => {
+        .subscribe((domain: CondutorModel) => {
           if (domain.id) {
             this.list.push(domain);
             this.formCondutor.reset();
@@ -66,7 +65,7 @@ export class CondutorComponent implements OnInit {
     }
   }
 
-  editar(condutor: Condutor): void {
+  editar(condutor: CondutorModel): void {
     this.formCondutor.controls['id'].setValue(condutor.id);
     this.formCondutor.controls['nome'].setValue(condutor.nome);
     this.formCondutor.controls['cpf'].setValue(condutor.cpf);
@@ -78,10 +77,10 @@ export class CondutorComponent implements OnInit {
     );
   }
 
-  remover(condutor: Condutor): void {
+  remover(condutor: CondutorModel): void {
     this.condutorService
       .remover(condutor.id)
-      .subscribe((condutor: Condutor) => {
+      .subscribe((condutor: CondutorModel) => {
         if (condutor.id) {
           this.carregaTabela();
         }
